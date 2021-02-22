@@ -7,7 +7,7 @@ import fresnel
 import PIL
 import IPython.display
 
-def simulate_polymer_dpd(N, A, gamma = 1.0, sigma = 1.0, dt=0.01, steps = 1e5, traj_frames = 5, kT = 0.8):
+def simulate_polymer_dpd(N, A, gamma = 1.0, sigma = 1.0, dt=0.01, steps = 1e5, kT = 0.8, trajectory_filename = 'trajectory.gsd', traj_frames = 5, ):
 
     # N is the number of monomers per chain (i.e. degree of polymerization)
     # lp is the persistence length of the polymer 
@@ -16,12 +16,10 @@ def simulate_polymer_dpd(N, A, gamma = 1.0, sigma = 1.0, dt=0.01, steps = 1e5, t
     # steps is the number of timesteps
     # kT is the simulation temperature
 
-    hoomd.util.quiet_status()
-
-    trajectory_filename = 'trajectory.gsd' # filename for output trajectory file
-
     ## Initialize sytem
+    hoomd.util.quiet_status();
     hoomd.context.initialize("");
+    hoomd.option.set_notice_level(0);  
 
     ## Set dimensions of simulation box to accomodate size of polymer
     L = N*sigma # box length (check units)
