@@ -1,4 +1,4 @@
-# poly_dpd
+# polysim
 
 A Python library for building and running simple dissipative particle dynamics (DPD) simulations using HOOMD-blue. 
 
