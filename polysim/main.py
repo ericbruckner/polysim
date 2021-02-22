@@ -109,7 +109,8 @@ def radius_gyration(pos):
 
 def render_polymer(pos, sigma = 1.0, color = [0.41, 0.30, 0.59]):
     scene = fresnel.Scene()
-
+    N = len(pos)
+    
     geometry = fresnel.geometry.Sphere(scene, N=N, position = pos, radius = sigma)
     geometry.material = fresnel.material.Material(color=fresnel.color.linear(color),
                                                 roughness=0.8)
