@@ -17,7 +17,7 @@ def simulate_polymer_dpd(N, A, gamma = 1.0, sigma = 1.0, dt=0.01, steps = 1e5, k
     # kT is the simulation temperature
 
     ## Initialize sytem
-    hoomd.util.quiet_status();
+    hoomd.util.quiet_status()
     hoomd.context.initialize("");
     hoomd.option.set_notice_level(0);  
 
