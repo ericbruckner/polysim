@@ -27,10 +27,10 @@ The function <code>simulate_polymer_dpd</code> is used to set-up and run a DPD s
     N = 10;
 
     ## Enter alpha, the repulsive force constant in the DPD conservative force
-    alpha = 1;
+    alpha = 0.1;
     
     ## Enter the number of timesteps
-    steps = 1e4
+    steps = 1e5
 
     ## Run simulation: Save the XYZ coordinates of the monomers
     coordinates  = simulate_polymer_dpd(N, alpha, steps = steps);
@@ -43,3 +43,5 @@ Once the polymer has been simulated, you can visualize the conformation using th
     from polysim.main import render_polymer
 
     render_polymer(coordinates)
+    
+<img src="https://github.com/ericbruckner/polysim/blob/main/examples/Colab_lesson_plan/sample_data/polymer_render.png" height="300">
