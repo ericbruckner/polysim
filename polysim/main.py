@@ -156,7 +156,7 @@ def Visualize2DRandomWalk(steps, Rg = 'on', end2end = 'on'):
         scale = 3
     X, Y = randwalk2D(steps)
 
-    r_mean, rg = radius_gyration(X,Y,np.zeros(len(X)))
+    r_mean, rg = radius_gyration2DRW(X,Y,np.zeros(len(X)))
 
     fig, ax = plt.subplots(figsize=(10,10))
 
@@ -176,4 +176,25 @@ def Visualize2DRandomWalk(steps, Rg = 'on', end2end = 'on'):
     if end2end == 'on':
         color = np.array([203,112,18])/255
         plt.plot([X[0], X[-1]],[Y[0],Y[-1]],'o--', color=color, linewidth = linewidth)
+        
+ def radius_gyration_2DRW(X,Y,Z):
+    
+    x = np.array(X)
+    y = np.array(Y)
+    z = np.zeros(len(X))
+    N = len(x)
+    pos = [x,y,z]
+    pos = np.array(pos).transpose()
+
+    r_mean = [np.mean(x),np.mean(y),np.mean(z)]
+    rg_sq = 0
+    
+    for k in np.arange(N):
+        rg_sq = rg_sq + sum((r_mean - pos[k])**2)
+
+    rg_sq = rg_sq / N
+    rg = np.sqrt(rg_sq)
+
+    return r_mean, rg
+
         
