@@ -115,7 +115,7 @@ def render_polymer(pos, sigma = 1.0, color = [0.41, 0.30, 0.59]):
     geometry.material = fresnel.material.Material(color=fresnel.color.linear(color),
                                                 roughness=0.8)
 
-    scene.camera = fresnel.camera.fit(scene, view='isometric', margin=0.0)
+    scene.camera = fresnel.camera.Orthographic.fit(scene, view='isometric', margin=0.0)
 
 
     out = fresnel.preview(scene)
@@ -123,3 +123,57 @@ def render_polymer(pos, sigma = 1.0, color = [0.41, 0.30, 0.59]):
     image.save('polymer_render.png')
 
     return IPython.display.Image('polymer_render.png')
+
+def randwalk2D(steps):
+    X = []
+    Y = []
+    R = []
+    x = 0
+    y = 0
+    for i in range(steps):
+        X.append(x)
+        Y.append(y)
+        r = np.random.randint(1,5)
+        R.append(r)
+        if r == 1:
+            x = x + 1
+        elif r == 2:
+            x = x - 1
+        elif r == 3:
+            y = y + 1
+        elif r == 4:
+            y = y - 1
+    
+    return X, Y
+
+def Visualize2DRandomWalk(steps, Rg = 'on', end2end = 'on'):
+    
+    if steps >= 10000:
+        linewidth = 1
+        scale = 2
+    else:
+        linewidth = 2
+        scale = 3
+    X, Y = randwalk2D(steps)
+
+    r_mean, rg = radius_gyration(X,Y,np.zeros(len(X)))
+
+    fig, ax = plt.subplots(figsize=(10,10))
+
+    xmin = r_mean[0] - scale*rg
+    xmax = r_mean[0] + scale*rg
+    ymin = r_mean[1] - scale*rg
+    ymax = r_mean[1] + scale*rg
+
+    plt.axis([xmin, xmax, ymin, ymax])
+    plt.axis('Off')
+    plt.plot(X,Y, 'k-', linewidth = linewidth)
+    
+    if Rg == 'on':
+        color = np.array([112,48,160])/255
+        draw_circle = mpl.patches.Circle((r_mean[0],r_mean[1]),rg, fill=True,edgecolor = color, facecolor = color, alpha = 0.5)
+        ax.add_artist(draw_circle)
+    if end2end == 'on':
+        color = np.array([203,112,18])/255
+        plt.plot([X[0], X[-1]],[Y[0],Y[-1]],'o--', color=color, linewidth = linewidth)
+        
