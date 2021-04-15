@@ -177,7 +177,7 @@ def Visualize2DRandomWalk(steps, Rg = 'on', end2end = 'on'):
         color = np.array([203,112,18])/255
         plt.plot([X[0], X[-1]],[Y[0],Y[-1]],'o--', color=color, linewidth = linewidth)
         
-def radius_gyration_2DRW(X,Y,Z):
+def radius_gyration2DRW(X,Y,Z):
     
     x = np.array(X)
     y = np.array(Y)
