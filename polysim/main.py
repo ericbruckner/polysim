@@ -6,6 +6,8 @@ import random
 import fresnel
 import PIL
 import IPython.display
+import matplotlib as mpl
+from matplotlib import pyplot as plt
 
 def simulate_polymer_dpd(N, A, gamma = 1.0, sigma = 1.0, dt=0.01, steps = 1e5, kT = 0.8, trajectory_filename = 'trajectory.gsd', traj_frames = 5, ):
 
